@@ -16,6 +16,8 @@ const int ledPin = 2;
 
 char val;
 
+int buttonPressed = 0;
+int buttonCleared = 0;
 int buttonVal;
 int xVal;
 int yVal;
@@ -39,15 +41,19 @@ void loop() {
   // put your main code here, to run repeatedly:
   //Serial.println("Hello, world!");
   buttonVal = digitalRead(buttonPin);
-   if (buttonVal == 0)
+   if (buttonVal == LOW)
   {
-    Serial.println("");
-    Serial.println("Button Pressed");
-    digitalWrite(ledPin, HIGH);
-    Serial.println("");
+    buttonPressed = 1;
+    if (buttonCleared = 1)
+    {
+      Serial.println("playtrack");
+      digitalWrite(ledPin, HIGH);
+    }
   } 
-  else
+  if (buttonVal == HIGH)
   {
+    buttonCleared = 1;
+    buttonPressed = 0;
     digitalWrite(ledPin, LOW);
   }
 
@@ -66,10 +72,9 @@ void loop() {
   xVal = analogRead(xPin);
   yVal = analogRead(yPin);
   joySwitchVal = digitalRead(joySwitch);
-  Serial.println(xVal);
-  Serial.println(yVal);
-  Serial.println(joySwitchVal);
-  Serial.println("");
+  //Serial.println(xVal);
+  //Serial.println(yVal);
+  //Serial.println(joySwitchVal);
 
   
 }
