@@ -11,6 +11,10 @@ const int buttonPin = 17;
 const int xPin = 4;
 const int yPin = 26;
 const int joySwitch = 23;
+const int ledPin = 2;
+//const int LED_BUILTIN = 2;
+
+char val;
 
 int buttonVal;
 int xVal;
@@ -24,6 +28,8 @@ void setup() {
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
   pinMode(joySwitch, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+  //pinMode(LED_BUILTIN, OUTPUT);
   
   Serial.begin(9600);
   
@@ -37,9 +43,26 @@ void loop() {
   {
     Serial.println("");
     Serial.println("Button Pressed");
+    digitalWrite(ledPin, HIGH);
     Serial.println("");
   } 
+  else
+  {
+    digitalWrite(ledPin, LOW);
+  }
 
+  if (Serial.available()) 
+   { // If data is available to read,
+     val = Serial.read(); // read it and store it in val
+   }
+   if (val == '1') 
+   { // If 1 was received
+     digitalWrite(ledPin, HIGH); // turn the LED on
+   } else {
+     digitalWrite(ledPin, LOW); // otherwise turn it off
+   }
+   //delay(10); // Wait 10 milliseconds for next reading
+ 
   xVal = analogRead(xPin);
   yVal = analogRead(yPin);
   joySwitchVal = digitalRead(joySwitch);
