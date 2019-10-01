@@ -16,8 +16,10 @@ const int ledPin = 2;
 
 char val;
 
-int buttonPressed = 0;
-int buttonCleared = 0;
+int buttonPushCounter = 0;   // counter for the number of button presses
+int buttonState = 0;         // current state of the button
+int lastButtonState = 0;     // previous state of the button
+
 int buttonVal;
 int xVal;
 int yVal;
@@ -40,22 +42,43 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   //Serial.println("Hello, world!");
-  buttonVal = digitalRead(buttonPin);
-   if (buttonVal == LOW)
+  buttonState = digitalRead(buttonPin);
+  
+  // compare the buttonState to its previous state
+  if (buttonState != lastButtonState) {
+    // if the state has changed, increment the counter
+    if (buttonState == LOW) {
+      // if the current state is HIGH then the button went from off to on:
+      buttonPushCounter++;
+      Serial.println("on");
+      Serial.print("number of button pushes: ");
+      Serial.println(buttonPushCounter);
+    } else {
+      // if the current state is LOW then the button went from on to off:
+      //Serial.println("off");
+    } 
+        delay(50);
+
+    }
+
+      lastButtonState = buttonState;
+
+ 
+ /*  if (buttonVal == 0)
   {
     buttonPressed = 1;
-    if (buttonCleared = 1)
+    if (buttonPressed == 1 && buttonCleared == 1)
     {
-      Serial.println("playtrack");
+      Serial.println("button pressed");
       digitalWrite(ledPin, HIGH);
     }
   } 
-  if (buttonVal == HIGH)
+  else if (buttonVal == 1)
   {
     buttonCleared = 1;
     buttonPressed = 0;
     digitalWrite(ledPin, LOW);
-  }
+  } */
 
   if (Serial.available()) 
    { // If data is available to read,
