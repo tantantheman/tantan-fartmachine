@@ -30,39 +30,32 @@ void draw()
 {
   if ( myPort.available() > 0) 
   {  // If data is available,
-  val = myPort.readStringUntil('\n');         // read it and store it in val
+  val = myPort.readStringUntil('\n'); 
+  val=val.trim();
   }  
   
   if (val != null) 
-  {                           //if we clicked in the window
-   myPort.write('1');//send a 1
+  {   
+   
+    //if we clicked in the window
+   //myPort.write('1');//send a 1
    //println(val);
-   if (isPlaying == 0)
+   if (val.equals("on") && isPlaying == 0)
    {
-   shouldPlay = 1;
-   println("1");   
+     isPlaying = 1;
+     println(val);
+     player.play();
+     delay(1900);
+     val = "farted";
+     //isPlaying = 0;
    }
-  } else 
-  {      
-   shouldPlay = 0;
-   myPort.write('0');          //send a 0
-  }  
-  
-  if (shouldPlay == 1 && isPlaying == 0)
-  {
-    isPlaying = 1;
-    player.play();
-    //player.rewind();
-    delay(1000);
-    shouldPlay = 0;
-    isPlaying = 0;
+   else 
+   {
+     player.rewind();
+     println(val);
+     isPlaying = 0;
+     //val = "played";
+   }
   }
- else if (shouldPlay == 1 && isPlaying == 1)
-  {
-    shouldPlay = 0;
-    isPlaying = 0;
-    player.rewind();
-  } 
   
-//println(val); //print it out in the console
 }

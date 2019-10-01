@@ -50,9 +50,10 @@ void loop() {
     if (buttonState == LOW) {
       // if the current state is HIGH then the button went from off to on:
       buttonPushCounter++;
-      Serial.println("on");
-      Serial.print("number of button pushes: ");
-      Serial.println(buttonPushCounter);
+      Serial.print("on");
+      Serial.print("\n");
+     // Serial.print("number of button pushes: ");
+      //Serial.println(buttonPushCounter);
     } else {
       // if the current state is LOW then the button went from on to off:
       //Serial.println("off");
