@@ -7,16 +7,46 @@
  * 
  */
 
-const int buttonPin = 4;
+const int buttonPin = 17;
+const int xPin = 4;
+const int yPin = 26;
+const int joySwitch = 23;
 
+int buttonVal;
+int xVal;
+int yVal;
+int joySwitchVal;
 
 void setup() {
   // put your setup code here, to run once:
+
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(xPin, INPUT);
+  pinMode(yPin, INPUT);
+  pinMode(joySwitch, INPUT_PULLUP);
+  
   Serial.begin(9600);
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println("Hello, world!");
-  delay(100);
+  //Serial.println("Hello, world!");
+  buttonVal = digitalRead(buttonPin);
+   if (buttonVal == 0)
+  {
+    Serial.println("");
+    Serial.println("Button Pressed");
+    Serial.println("");
+  } 
+
+  xVal = analogRead(xPin);
+  yVal = analogRead(yPin);
+  joySwitchVal = digitalRead(joySwitch);
+  Serial.println(xVal);
+  Serial.println(yVal);
+  Serial.println(joySwitchVal);
+  Serial.println("");
+
+  
 }
