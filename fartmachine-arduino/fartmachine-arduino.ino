@@ -1,3 +1,4 @@
+#include <SimpleMessageSystem.h>
 
 /*Things to do:
  * 
@@ -63,42 +64,41 @@ void loop() {
     }
 
       lastButtonState = buttonState;
-
- 
- /*  if (buttonVal == 0)
-  {
-    buttonPressed = 1;
-    if (buttonPressed == 1 && buttonCleared == 1)
-    {
-      Serial.println("button pressed");
-      digitalWrite(ledPin, HIGH);
-    }
-  } 
-  else if (buttonVal == 1)
-  {
-    buttonCleared = 1;
-    buttonPressed = 0;
-    digitalWrite(ledPin, LOW);
-  } */
-
-  if (Serial.available()) 
-   { // If data is available to read,
-     val = Serial.read(); // read it and store it in val
-   }
-   if (val == '1') 
-   { // If 1 was received
-     digitalWrite(ledPin, HIGH); // turn the LED on
-   } else {
-     digitalWrite(ledPin, LOW); // otherwise turn it off
-   }
-   //delay(10); // Wait 10 milliseconds for next reading
  
   xVal = analogRead(xPin);
   yVal = analogRead(yPin);
   joySwitchVal = digitalRead(joySwitch);
   //Serial.println(xVal);
-  //Serial.println(yVal);
+ // Serial.println(yVal);
   //Serial.println(joySwitchVal);
+
+  // We display our data separated by a comma  
+  Serial.print(xVal,DEC);
+  Serial.print(",");
+  Serial.print(yVal,DEC);
+  Serial.print(",");
+/*
+  // compare the buttonState to its previous state
+  if (buttonState != lastButtonState) {
+    // if the state has changed, increment the counter
+    if (buttonState == LOW) {
+      // if the current state is HIGH then the button went from off to on:
+      buttonPushCounter++;
+      Serial.print("on");
+      //Serial.print("\n");
+    } else {
+      // if the current state is LOW then the button went from on to off:
+      //Serial.println("off");
+      Serial.print("off");
+    } 
+        //delay(50);
+
+    }*/
+
+  Serial.print(buttonState);
+
+  // We end with a newline character to facilitate subsequent analysis  
+  Serial.print("\n");
 
   
 }
