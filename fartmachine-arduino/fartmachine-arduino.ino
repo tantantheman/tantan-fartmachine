@@ -1,10 +1,10 @@
 #include <Bounce2.h>
 
-const int buttonPin = 2;
-const int xPin = 4;
+const int buttonPin = 12;
+const int xPin = 35;
 const int yPin = 26;
 const int joySwitch = 23;
-const int switchPin = 18;
+const int switchPin = 4;
 
 const int thingOn = 1;
 const int thingOff = 0;

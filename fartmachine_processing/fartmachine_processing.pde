@@ -1,5 +1,4 @@
 import processing.serial.*;
-//import processing.sound.*;
 import ddf.minim.*;
 Minim minim;
 AudioPlayer fart1;
@@ -66,10 +65,10 @@ void draw()
   
     println(x + " " + y + " " + switchOn + " " + buttonOn);
   
-  if (buttonOn == 0 && farting == 0)
+  if (buttonOn == 1)
      {
        //farting = 1;
-       if (switchOn == 0 && farting == 0)
+       if (switchOn == 0)
        {
          farting = 1;
          println(farting);
@@ -84,7 +83,7 @@ void draw()
        //fartOk = 1;
 
      }
-  if (buttonOn == 1);
+  if (buttonOn == 0);
      {
        farting = 0;
        if (fartOnePlayed == 1)
