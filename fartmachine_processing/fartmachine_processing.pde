@@ -63,7 +63,7 @@ void draw()
     switchOn = vals[2];
     buttonOn = vals[3];
     
-    float gain = map(fartVolume, 0, 4095, -10.0, 10.0);
+    float gain = map(fartVolume, 0, 4095, -50.0, 50.0);
     fart1.setGain(gain);
     fart2.setGain(gain);
     
