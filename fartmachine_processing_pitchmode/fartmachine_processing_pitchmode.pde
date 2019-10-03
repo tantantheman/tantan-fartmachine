@@ -21,6 +21,7 @@ int fartTwoPlayed = 0;
 int fartOk = 0;
 
 TickRate rateControl;
+Gain gain;
 FilePlayer filePlayer1;
 FilePlayer filePlayer2;
 String fileName1 = "fart1.wav";
@@ -32,7 +33,7 @@ boolean firstContact = false;
 void setup()
 {
   frameRate(240); 
-  //println(Serial.list());
+
   String portName = Serial.list()[2]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil('\n');
@@ -43,20 +44,13 @@ void setup()
   
   filePlayer1 = new FilePlayer (minim.loadFileStream(fileName1));
   filePlayer2 = new FilePlayer (minim.loadFileStream(fileName2));
-  
-  //filePlayer1.loop();
-  //filePlayer2.loop();
-  
+  gain = new Gain(0.f);
+
   out = minim.getLineOut();
-  filePlayer1.patch(out);
-  filePlayer2.patch(out);
+  filePlayer1.patch(gain).patch(out);
+  filePlayer2.patch(gain).patch(out);
   
   //rateControl = new TickRate(1.f);
-  //out = minim.getLineOut();
-  //fart1.patch(rateControl).patch(out);
-  //fart2.patch(rateControl).patch(out);
-  
-  //println(Serial.list());
 }
 
 // data support from the serial port
@@ -87,25 +81,18 @@ void draw()
     switchOn = vals[2];
     buttonOn = vals[3];
     
-    float gain = map(fartVolume, 0, 4095, -15.0, 15.0);
-    float pan = map(fartPitch, 0, 4095, -1.0, 1.0);
-    fart1.setGain(gain);
-    fart2.setGain(gain);
-    fart1.setPan(pan);
-    fart2.setPan(pan);
+    float db = map(fartVolume, 0, 4095, -10, 15);
+    //float pan = map(fartPitch, 0, 4095, -1.0, 1.0);
+    gain.setValue(db);
     
-  
     println(fartVolume + " " + fartPitch + " " + switchOn + " " + buttonOn);
   
   if (buttonOn == 1)
      {
-       //farting = 1;
        if (switchOn == 0)
        {
          farting = 1;
-         //println(farting);
          fartOnePlayed = 1;
-         //fart1.play();
          filePlayer1.play();
        }
        else if (switchOn == 1)       
@@ -113,13 +100,10 @@ void draw()
          fartTwoPlayed = 1;
          filePlayer2.play();
        }
-       //fartOk = 1;
-
      }
   if (buttonOn == 0);
      {
        if (filePlayer1.isPlaying())
-       //filePlayer1.pause();
        farting = 0;
        if (fartOnePlayed == 1)
        {
