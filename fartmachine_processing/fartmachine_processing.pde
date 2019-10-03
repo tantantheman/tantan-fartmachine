@@ -11,7 +11,8 @@ int isPlaying = 0;
 
 int x;
 int y;
-int b;
+int buttonOn;
+int switchOn;
 
 boolean firstContact = false;
 
@@ -19,21 +20,33 @@ boolean firstContact = false;
 void setup()
 {
   frameRate(240); 
+  //println(Serial.list());
   String portName = Serial.list()[2]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil('\n');
+  
   minim = new Minim(this);
   player = minim.loadFile("fart1.wav");
   //println(Serial.list());
 }
 
 // data support from the serial port
-void serialEvent(Serial portName) 
+void serialEvent(Serial myPort) 
 {
   // read the data until the newline n appears
-  val = portName.readStringUntil('\n');
+  val = myPort.readStringUntil('\n');
   
-  if (val != null)
+
+}
+
+void draw()
+{
+   if ( myPort.available() > 0) 
+  {  // If data is available,
+  val = myPort.readStringUntil('\n'); 
+  //val=val.trim();
+  }
+    if (val != null)
   {
         val = trim(val);
         
@@ -43,19 +56,14 @@ void serialEvent(Serial portName)
     // we assign to variables
     x = vals[0];
     y = vals[1] ;
-    b = vals[2];
+    switchOn = vals[2];
+    buttonOn = vals[3];
+    
+    println(x + " " + y + " " + switchOn + " " + buttonOn);
 
   }
-}
-
-void draw()
-{
-  /* if ( myPort.available() > 0) 
-  {  // If data is available,
-  val = myPort.readStringUntil('\n'); 
-  //val=val.trim();
-  }  
-  
+    
+  /*
   if (val != null) 
   {   
    
