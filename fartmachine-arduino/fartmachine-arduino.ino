@@ -62,10 +62,10 @@ void loop() {
   Serial.print(switchVal, DEC);
   Serial.print(",");
   
-  
+  Serial.print(buttonState, DEC);
 
   // compare the buttonState to its previous state
-  if (buttonState != lastButtonState) {
+  /*if (buttonState != lastButtonState) {
    // Serial.print("hurr");
     // if the state has changed, increment the counter
     if (buttonState == LOW) {
@@ -83,13 +83,14 @@ void loop() {
    else 
    {
     Serial.print(thingOff, DEC); 
-   }
+   } 
+   */
 
   //Serial.print(buttonState);
 
   // We end with a newline character to facilitate subsequent analysis  
   Serial.print("\n");
     //Serial.println(buttonState);
-  lastButtonState = buttonState;
+ // lastButtonState = buttonState;
   
 }

@@ -2,7 +2,8 @@ import processing.serial.*;
 //import processing.sound.*;
 import ddf.minim.*;
 Minim minim;
-AudioPlayer player;
+AudioPlayer fart1;
+AudioPlayer fart2;
 
 Serial myPort;
 String val;
@@ -13,6 +14,8 @@ int x;
 int y;
 int buttonOn;
 int switchOn;
+int fartOnePlayed = 0;
+int fartTwoPlayed = 0;
 
 boolean firstContact = false;
 
@@ -26,7 +29,8 @@ void setup()
   myPort.bufferUntil('\n');
   
   minim = new Minim(this);
-  player = minim.loadFile("fart1.wav");
+  fart1 = minim.loadFile("fart1.wav");
+  fart2 = minim.loadFile("fart2.wav");
   //println(Serial.list());
 }
 
@@ -59,33 +63,40 @@ void draw()
     switchOn = vals[2];
     buttonOn = vals[3];
     
-    println(x + " " + y + " " + switchOn + " " + buttonOn);
+    //println(x + " " + y + " " + switchOn + " " + buttonOn);
 
   }
     
-  /*
-  if (val != null) 
-  {   
-   
-    //if we clicked in the window
-   //myPort.write('1');//send a 1
-   //println(val);
-   if (val.equals("on") && isPlaying == 0)
-   {
-     isPlaying = 1;
-     println(val);
-     player.play();
-     delay(1900);
-     val = "farted";
-     //isPlaying = 0;
-   }
-   else 
-   {
-     player.rewind();
-     println(val);
-     isPlaying = 0;
-     //val = "played";
-   }
-  } */
+  
+     if (buttonOn == 0)
+     {
+       if (switchOn == 0)
+       {
+         fartOnePlayed = 1;
+         fart1.play();
+         println("farted");
+       }
+       if (switchOn == 1) 
+       {
+         fartTwoPlayed = 1;
+         fart2.play();
+       }
+     }
+     else
+     {
+       /* if (fartOnePlayed == 1)
+       {
+       fart1.rewind();
+       fartOnePlayed = 0;
+       }
+       if (fartTwoPlayed == 1)
+       {
+       fart2.rewind();
+       fartTwoPlayed = 0;
+       }*/
+       fart1.rewind();
+       fart2.rewind();
+     }
+
   
 }
