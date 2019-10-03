@@ -1,18 +1,10 @@
-#include <SimpleMessageSystem.h>
-
-/*Things to do:
- * 
- * Turn on an LED when the device is on. When the button is pressed
- * have the LED turn off. The switch changes the color of the LED
- * based on the fart track.
- * 
- */
+#include <Bounce2.h>
 
 const int buttonPin = 2;
 const int xPin = 4;
 const int yPin = 26;
 const int joySwitch = 23;
-const int switchPin = 14;
+const int switchPin = 18;
 
 const int thingOn = 1;
 const int thingOff = 0;
@@ -30,17 +22,20 @@ int yVal;
 int joySwitchVal;
 int switchVal;
 
+Bounce debouncer = Bounce();
+
 void setup() {
   // put your setup code here, to run once:
+  //debouncer.attach(switchPin, INPUT);
+  //debouncer.interval(25);
 
   pinMode(buttonPin, INPUT_PULLUP);
-  pinMode(xPin, INPUT);
-  pinMode(yPin, INPUT);
+  pinMode(xPin, INPUT_PULLUP);
+  pinMode(yPin, INPUT_PULLUP);
   pinMode(joySwitch, INPUT_PULLUP);
-  pinMode(switchPin, INPUT);
-  
+  pinMode(switchPin, INPUT_PULLUP);
   Serial.begin(9600);
-  
+
 }
 
 void loop() {
@@ -50,22 +45,17 @@ void loop() {
   yVal = analogRead(yPin);
   joySwitchVal = digitalRead(joySwitch);
   switchVal = digitalRead(switchPin);
-  //Serial.println(xVal);
- // Serial.println(yVal);
-  //Serial.println(joySwitchVal);
 
-  // We display our data separated by a comma  
-  Serial.print(xVal,DEC);
+  // We display our data separated by a comma
+  Serial.print(xVal, DEC);
   Serial.print(",");
-  Serial.print(yVal,DEC);
+  Serial.print(yVal, DEC);
   Serial.print(",");
   Serial.print(switchVal, DEC);
   Serial.print(",");
-  
-  Serial.print(buttonState, DEC);
+  //Serial.print(buttonState, DEC);
 
-  // compare the buttonState to its previous state
-  /*if (buttonState != lastButtonState) {
+  if (buttonState != lastButtonState) {
    // Serial.print("hurr");
     // if the state has changed, increment the counter
     if (buttonState == LOW) {
@@ -84,13 +74,16 @@ void loop() {
    {
     Serial.print(thingOff, DEC); 
    } 
-   */
+   
+  // compare the buttonState to its previous state
+
 
   //Serial.print(buttonState);
 
-  // We end with a newline character to facilitate subsequent analysis  
+  // We end with a newline character to facilitate subsequent analysis
   Serial.print("\n");
-    //Serial.println(buttonState);
- // lastButtonState = buttonState;
-  
+  //Serial.println(buttonState);
+  lastButtonState = buttonState;
+  delay(100);
+
 }

@@ -14,8 +14,10 @@ int x;
 int y;
 int buttonOn;
 int switchOn;
+int farting = 0;
 int fartOnePlayed = 0;
 int fartTwoPlayed = 0;
+int fartOk = 0;
 
 boolean firstContact = false;
 
@@ -39,7 +41,6 @@ void serialEvent(Serial myPort)
 {
   // read the data until the newline n appears
   val = myPort.readStringUntil('\n');
-  
 
 }
 
@@ -62,29 +63,31 @@ void draw()
     y = vals[1] ;
     switchOn = vals[2];
     buttonOn = vals[3];
-    
-    //println(x + " " + y + " " + switchOn + " " + buttonOn);
-
-  }
-    
   
-     if (buttonOn == 0)
+    println(x + " " + y + " " + switchOn + " " + buttonOn);
+  
+  if (buttonOn == 0 && farting == 0)
      {
-       if (switchOn == 0)
+       //farting = 1;
+       if (switchOn == 0 && farting == 0)
        {
+         farting = 1;
+         println(farting);
          fartOnePlayed = 1;
          fart1.play();
-         println("farted");
        }
-       if (switchOn == 1) 
+       else if (switchOn == 1)       
        {
          fartTwoPlayed = 1;
          fart2.play();
        }
+       //fartOk = 1;
+
      }
-     else
+  if (buttonOn == 1);
      {
-       /* if (fartOnePlayed == 1)
+       farting = 0;
+       if (fartOnePlayed == 1)
        {
        fart1.rewind();
        fartOnePlayed = 0;
@@ -93,10 +96,8 @@ void draw()
        {
        fart2.rewind();
        fartTwoPlayed = 0;
-       }*/
-       fart1.rewind();
-       fart2.rewind();
+       }
      }
+  }
 
-  
 }
