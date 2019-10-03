@@ -1,5 +1,7 @@
 import processing.serial.*;
 import ddf.minim.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 Minim minim;
 AudioPlayer fart1;
 AudioPlayer fart2;
@@ -18,6 +20,8 @@ int fartOnePlayed = 0;
 int fartTwoPlayed = 0;
 int fartOk = 0;
 
+TickRate rateControl;
+AudioOutput out;
 boolean firstContact = false;
 
 
@@ -32,6 +36,12 @@ void setup()
   minim = new Minim(this);
   fart1 = minim.loadFile("fart1.wav");
   fart2 = minim.loadFile("fart2.wav");
+  
+  //rateControl = new TickRate(1.f);
+  //out = minim.getLineOut();
+  //fart1.patch(rateControl).patch(out);
+  //fart2.patch(rateControl).patch(out);
+  
   //println(Serial.list());
 }
 
