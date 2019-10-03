@@ -28,7 +28,7 @@ String fileName2 = "fart2.wav";
 TickRate rateControl;
 Gain gain;
 AudioOutput out;
-//boolean firstContact = false;
+boolean firstContact = false;
 
 void setup()
 {
@@ -42,12 +42,10 @@ void setup()
 
   filePlayer1 = new FilePlayer (minim.loadFileStream(fileName1));
   filePlayer2 = new FilePlayer (minim.loadFileStream(fileName2));
-  
   gain = new Gain(0.f);
   rateControl = new TickRate(1.f);
   out = minim.getLineOut();
   rateControl.setInterpolation(true);
-  
   filePlayer1.patch(rateControl).patch(gain).patch(out);
   filePlayer2.patch(rateControl).patch(gain).patch(out);
   
@@ -117,6 +115,7 @@ void draw()
        println("FART2REWIND");
        filePlayer2.rewind();
        fartTwoPlayed = 0;
+       filePlayer2.mute();
        }
      }
   }
