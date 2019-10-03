@@ -74,8 +74,11 @@ void draw()
     buttonOn = vals[3];
     
     float gain = map(fartVolume, 0, 4095, -50.0, 50.0);
+    float pan = map(fartPitch, 0, 4095, -1.0, 1.0);
     fart1.setGain(gain);
     fart2.setGain(gain);
+    fart1.setPan(pan);
+    fart2.setPan(pan);
     
   
     println(fartVolume + " " + fartPitch + " " + switchOn + " " + buttonOn);
