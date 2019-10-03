@@ -25,6 +25,7 @@ FilePlayer filePlayer1;
 FilePlayer filePlayer2;
 String fileName1 = "fart1.wav";
 String fileName2 = "fart2.wav";
+
 TickRate rateControl;
 Gain gain;
 AudioOutput out;
@@ -39,7 +40,7 @@ void setup()
   myPort.bufferUntil('\n');
   
   minim = new Minim(this);
-
+  fart1 =minim.loadFile("fart1.wav");
   filePlayer1 = new FilePlayer (minim.loadFileStream(fileName1));
   filePlayer2 = new FilePlayer (minim.loadFileStream(fileName2));
   gain = new Gain(0.f);
@@ -93,7 +94,8 @@ void draw()
        {
          println("fart1");
          fartOnePlayed = 1;
-         filePlayer1.play();
+         //filePlayer1.play();
+         fart1.play();
        }
        else if (switchOn == 1)       
        {
@@ -107,7 +109,7 @@ void draw()
        if (fartOnePlayed == 1)
        {
          println("FART1REWIND");
-       filePlayer1.rewind();
+       fart1.rewind();
        fartOnePlayed = 0;
        }
        if (fartTwoPlayed == 1)
@@ -115,7 +117,7 @@ void draw()
        println("FART2REWIND");
        filePlayer2.rewind();
        fartTwoPlayed = 0;
-       filePlayer2.mute();
+       //filePlayer2.mute();
        }
      }
   }
