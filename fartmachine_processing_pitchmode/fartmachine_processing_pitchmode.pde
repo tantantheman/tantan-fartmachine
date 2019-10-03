@@ -20,15 +20,15 @@ int fartOnePlayed = 0;
 int fartTwoPlayed = 0;
 int fartOk = 0;
 
-TickRate rateControl;
-Gain gain;
+
 FilePlayer filePlayer1;
 FilePlayer filePlayer2;
 String fileName1 = "fart1.wav";
 String fileName2 = "fart2.wav";
+TickRate rateControl;
+Gain gain;
 AudioOutput out;
-boolean firstContact = false;
-
+//boolean firstContact = false;
 
 void setup()
 {
@@ -39,15 +39,15 @@ void setup()
   myPort.bufferUntil('\n');
   
   minim = new Minim(this);
-  fart1 = minim.loadFile("fart1.wav");
-  fart2 = minim.loadFile("fart2.wav");
-  
+
   filePlayer1 = new FilePlayer (minim.loadFileStream(fileName1));
   filePlayer2 = new FilePlayer (minim.loadFileStream(fileName2));
+  
   gain = new Gain(0.f);
   rateControl = new TickRate(1.f);
-
   out = minim.getLineOut();
+  rateControl.setInterpolation(true);
+  
   filePlayer1.patch(rateControl).patch(gain).patch(out);
   filePlayer2.patch(rateControl).patch(gain).patch(out);
   
@@ -84,16 +84,15 @@ void draw()
     
     float db = map(fartVolume, 0, 4095, -10, 15);
     gain.setValue(db);
-    float rate = map(fartPitch, 0, 4095, 0.5f, 3.f);
+    float rate = map(fartPitch, 0, 4095, 0.8f, 3.f);
     rateControl.value.setLastValue(rate);
-
+    
     println(fartVolume + " " + fartPitch + " " + switchOn + " " + buttonOn);
   
   if (buttonOn == 1)
      {
        if (switchOn == 0)
        {
-         //farting = 1;
          println("fart1");
          fartOnePlayed = 1;
          filePlayer1.play();
@@ -107,15 +106,15 @@ void draw()
      }
   if (buttonOn == 0);
      {
-       if (filePlayer1.isPlaying() || filePlayer2.isPlaying())
-       farting = 0;
        if (fartOnePlayed == 1)
        {
+         println("FART1REWIND");
        filePlayer1.rewind();
        fartOnePlayed = 0;
        }
        if (fartTwoPlayed == 1)
        {
+       println("FART2REWIND");
        filePlayer2.rewind();
        fartTwoPlayed = 0;
        }
