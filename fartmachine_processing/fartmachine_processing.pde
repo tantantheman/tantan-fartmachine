@@ -9,8 +9,8 @@ String val;
 int shouldPlay = 0;
 int isPlaying = 0;
 
-int x;
-int y;
+int fartPitch;
+int fartVolume;
 int buttonOn;
 int switchOn;
 int farting = 0;
@@ -58,12 +58,17 @@ void draw()
     int[] vals = int(splitTokens(val, ","));
     
     // we assign to variables
-    x = vals[0];
-    y = vals[1] ;
+    fartVolume = vals[0];
+    fartPitch = vals[1] ;
     switchOn = vals[2];
     buttonOn = vals[3];
+    
+    float gain = map(fartVolume, 0, 4095, -10.0, 10.0);
+    fart1.setGain(gain);
+    fart2.setGain(gain);
+    
   
-    println(x + " " + y + " " + switchOn + " " + buttonOn);
+    println(fartVolume + " " + fartPitch + " " + switchOn + " " + buttonOn);
   
   if (buttonOn == 1)
      {
