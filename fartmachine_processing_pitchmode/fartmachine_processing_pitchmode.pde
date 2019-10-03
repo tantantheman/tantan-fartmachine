@@ -45,12 +45,13 @@ void setup()
   filePlayer1 = new FilePlayer (minim.loadFileStream(fileName1));
   filePlayer2 = new FilePlayer (minim.loadFileStream(fileName2));
   gain = new Gain(0.f);
+  rateControl = new TickRate(1.f);
 
   out = minim.getLineOut();
-  filePlayer1.patch(gain).patch(out);
-  filePlayer2.patch(gain).patch(out);
+  filePlayer1.patch(rateControl).patch(gain).patch(out);
+  filePlayer2.patch(rateControl).patch(gain).patch(out);
   
-  //rateControl = new TickRate(1.f);
+  
 }
 
 // data support from the serial port
@@ -82,28 +83,31 @@ void draw()
     buttonOn = vals[3];
     
     float db = map(fartVolume, 0, 4095, -10, 15);
-    //float pan = map(fartPitch, 0, 4095, -1.0, 1.0);
     gain.setValue(db);
-    
+    float rate = map(fartPitch, 0, 4095, 0.5f, 3.f);
+    rateControl.value.setLastValue(rate);
+
     println(fartVolume + " " + fartPitch + " " + switchOn + " " + buttonOn);
   
   if (buttonOn == 1)
      {
        if (switchOn == 0)
        {
-         farting = 1;
+         //farting = 1;
+         println("fart1");
          fartOnePlayed = 1;
          filePlayer1.play();
        }
        else if (switchOn == 1)       
        {
+         println("fart2");
          fartTwoPlayed = 1;
          filePlayer2.play();
        }
      }
   if (buttonOn == 0);
      {
-       if (filePlayer1.isPlaying())
+       if (filePlayer1.isPlaying() || filePlayer2.isPlaying())
        farting = 0;
        if (fartOnePlayed == 1)
        {
