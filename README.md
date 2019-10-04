@@ -6,7 +6,7 @@ A performable fart machine for class. Module 2, Task 2 (Performance Device).
 
 Programming in both Processing and Arduino IDE.  
   
-**Dependencies:** 
+**Dependencies:**   
 Processing.serial  
 ddf.minim
 
