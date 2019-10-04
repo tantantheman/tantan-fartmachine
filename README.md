@@ -1,4 +1,4 @@
-Introducing: The Fart-O-Matic.
+# H1 Introducing: The Fart-O-Matic.
 
 ![alt text][intro]
 
