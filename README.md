@@ -1,5 +1,3 @@
-# tantan-fartmachine
-
 Introducing: The Fart-O-Matic.
 
 ![alt text][intro]
@@ -51,4 +49,6 @@ The second big technical difficulty was on the Processing side. In order to acco
 ![alt text][ending]
 
 [ending]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-10.jpg "Fartomatic Inside"
+
+"Fart 2" sound effect used under the Creative Commons Attribution license, originally recorded by Mike Koenig.
 
