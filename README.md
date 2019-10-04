@@ -18,12 +18,20 @@ The buttom-right corner of the top of the box is the button, which produces the 
 
 The audio is output through the Raspberry Pi's 3.5mm analog audio jack. As a result, you will need both a power cable to power the Pi and its connected components, as well as a 3.5mm cable to connect to speakers or a pair of headphones. This was implemented this way so that the Fart-O-Matic could potentially be plugged into large speaker systems for all the more mischevious and immature fun.
 
+![alt text][power]
+
+[power]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-9.jpg "Fartomatic IO"
+
 **Implementation:**  
 To achieve the cohesive performance device, the ESP32 translates the analog signal of the joystick and the digital signals of the switch and button to the Raspberry Pi, allowing for the Processing platform to get precise values for our sonification. 
 
 Essentially, the device is a sound modulator, as the fart noises may be replaced with other sources of audio, and the machine can adjust the gain and pitch of the sound as well. We use the minim library for Processing, which allows for real-time sound modification and playback controls. 
 
 The enclosure was built for maximum repairability and accessibility. The top of the enclosure is on a hinge, which allows for immediate access to all the components in use. The top of the box also rests on the button, which was hot-glued onto a bracket so that the top of the box functions as a larger, clickable surface much like a drum pad. The components are all located on the right side of the box, meant to be playable with one hand. 
+
+![alt text][inside]
+
+[inside]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-5.jpg "Fartomatic Inside"
 
 **Technical Difficulties:**  
 There were several difficulties faced during the build process, as the combination of both hardware and software meant that there were a lot of possibilities of things going wrong.  
