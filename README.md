@@ -2,6 +2,10 @@
 
 Introducing: The Fart-O-Matic.
 
+![alt text][intro]
+
+[intro]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-11.jpg "Fartomatic Device"
+
 A performable fart machine for class. Module 2, Task 2 (Performance Device).
 
 Programming in both Processing and Arduino IDE.  
@@ -27,6 +31,10 @@ To achieve the cohesive performance device, the ESP32 translates the analog sign
 
 Essentially, the device is a sound modulator, as the fart noises may be replaced with other sources of audio, and the machine can adjust the gain and pitch of the sound as well. We use the minim library for Processing, which allows for real-time sound modification and playback controls. 
 
+![alt text][inside]
+
+[inside]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-3.jpg "Fartomatic Joystick Control"
+
 The enclosure was built for maximum repairability and accessibility. The top of the enclosure is on a hinge, which allows for immediate access to all the components in use. The top of the box also rests on the button, which was hot-glued onto a bracket so that the top of the box functions as a larger, clickable surface much like a drum pad. The components are all located on the right side of the box, meant to be playable with one hand. 
 
 ![alt text][inside]
@@ -39,3 +47,8 @@ There were several difficulties faced during the build process, as the combinati
 Switch and button bouncing was a serious issue, as the code relied on having a stable digital read for those components. Any bouncing would trigger events that were only supposed to happen upon a physical click of a button or toggle of a switch. However, those were solved through activating internal pullup resistors through the Arduino IDE. 
 
 The second big technical difficulty was on the Processing side. In order to accomplish real time pitch and gain modulation, you had to correctly implement the minim library's music player as a continuous output, rather than just a file that is to be played. This allows for a constant pass of information that can be modulated with the joystick. 
+
+![alt text][ending]
+
+[ending]: https://github.com/tantantheman/tantan-fartmachine/blob/master/documentation_photos/fartomatic-10.jpg "Fartomatic Inside"
+
